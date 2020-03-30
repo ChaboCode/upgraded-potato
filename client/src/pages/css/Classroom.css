@@ -1,0 +1,62 @@
+:root {
+    --bordes: 1px solid rgb(168, 206, 236);
+}
+
+#tech{
+    font-size: 35px;
+    color: rgb(155, 190, 219);
+}
+
+/**************************
+ * CSS para la sidebar de los grupos 
+ */
+
+#groups {
+    width: 300px;
+    min-height: 100vh;
+    border-right: var(--bordes);
+    float: left;
+    text-align: start;
+}
+
+.sign {
+    background-color: rgb(38, 83, 104);
+    font-size: 25px;
+    padding: 5px;
+    text-align: center;
+}
+
+.group {
+    position: relative;
+    left: 20px;
+    font-size: 20px;
+    margin: 5px;
+}
+
+/**************************
+ * CSS para las pestanas de la aplicacion
+ */
+
+#tabs {
+     border-bottom: var(--bordes);
+     text-align: left;
+     height: 30px;
+}
+
+.tab {
+    padding: 5px;
+    font-size: 15px;
+    background-color: var(--gray-1);
+    border: 1px solid var(--gray-5);
+    border-top-left-radius: 20%;
+    border-top-right-radius: 20%;
+    margin-left: 6px;
+
+    position: relative;
+    top:8px;
+}
+
+
+#table{
+    float: left;
+}

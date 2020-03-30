@@ -1,0 +1,45 @@
+#container {
+    display: block;
+    box-shadow: 0px 0px 5px black;
+    background-color: rgb(77, 77, 77);
+    border-radius: 1%;
+    width: 450px;
+    height: 450px;
+
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 60px;
+}
+
+span {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 26px;
+    position: relative;
+}
+
+input {
+    position: relative;
+    top: 170px;
+    left: 54px;
+    font-size: 20px;
+}
+
+#hello {
+    top: 50px;
+    font-size: 35px;
+}
+
+#message {
+    top: 170px;
+    left: -70px;
+}
+
+button {
+    position: relative;
+    top: 270px;
+    left: -145px;
+    height: 70px;
+    width: 140px;
+
+    
+}
