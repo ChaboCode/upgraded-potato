@@ -19,13 +19,18 @@ class Home extends Component {
         this.handleChange = this.handleChange.bind(this)
     }
 
-    handleClick(e) {
+    async handleClick(e) {
         e.preventDefault()
         //TODO: implement this
-        axios.post('127.0.0.1:5000/get/groupsFromKey', {key: this.state.key})
-        .then(res => {
-            console.log(res)
-        })
+        const response = await axios.post('http://localhost:5000/teacher/getGroups', {key: this.state.key})
+        //console.log(response)
+        const groups = response.data
+        console.log(groups)
+        for(let i = 0; i < groups.lenght; ++i) {
+            console.log(groups[i])
+        }
+
+
 
         this.setState({
             logged: true,

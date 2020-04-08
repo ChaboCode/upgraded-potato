@@ -14,14 +14,12 @@ class Row extends Component {
     e.preventDefault()
     const cells = document.getElementsByClassName('activitie')
     const cell = cells[colLenght * row + col]
-    // console.log(cell)
     return cell
   }
 
   handleClick(e, row, col, colLenght) {
     e.preventDefault()
     this.selector.current.show(row, col)
-    console.log('xd')
   }
 
   handleOnMouseEnter(e, row, col, colLenght) {
@@ -40,7 +38,6 @@ class Row extends Component {
     let deployRowCol = (row, col, colLenght) => {
       const cells = document.getElementsByClassName('activitie')
       const cell = cells[colLenght * row + col]
-      console.log(cell)
     }
 
     deployRowCol.cells = this.cells

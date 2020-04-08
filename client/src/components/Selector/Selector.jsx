@@ -24,7 +24,6 @@ class Selector extends Component {
       left: (394 + ((col - 1) * 28)).toString() + 'px',
       display: 'block'
     })
-    console.log(this.state)
     this.score.current.focus()
   }
 
