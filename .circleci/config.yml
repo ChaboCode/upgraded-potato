@@ -11,6 +11,11 @@ jobs:
           steps:
             - run: ls
             - run: cd server
+            
+            - run: cd client
+            - run: npm install
+            - run: npm test
+            - run: cd ../server
             - run: npm install
 workflows:
     build-and-test:
