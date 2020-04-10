@@ -1,6 +1,5 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-const ObjectID = Schema.Types.ObjectId
 
 let TeacherSchema = new Schema ({
     key: {
@@ -14,4 +13,4 @@ let TeacherSchema = new Schema ({
     }
 })
 
-module.exports = mongoose.model('Teacher', TeacherSchema)
+module.exports = mongoose.model('Teachers', TeacherSchema, 'Teachers')

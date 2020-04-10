@@ -26,9 +26,11 @@ class Home extends Component {
         //console.log(response)
         const groups = response.data
         console.log(groups)
+        let name = []
         for(let i = 0; i < groups.lenght; ++i) {
-            console.log(groups[i])
+            name.push(await axios.post('http://localhost:5000/group/getNameById', {id: groups[i].group}))
         }
+        console.log(name)
 
 
 
