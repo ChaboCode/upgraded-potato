@@ -1,11 +1,12 @@
 let mongoose = require('mongoose'),
     express = require('express'),
-    router = express.Router()
+    router = express.Router(),
+    sha256 = require('js-sha256').sha256
 
-let user = require('../models/TeacherSchema')
+let Teacher = require('../models/TeacherSchema')
 
 router.route('/create').post((req, res) => {
-    user.create(req.body, (error, data) => {
+    Teacher.create(req.body, (error, data) => {
         if(err) {
             return next(error)
         }
@@ -16,9 +17,23 @@ router.route('/create').post((req, res) => {
     })
 })
 
-router.route('/').get((req, res) => {
-    console.log('xd')
-    res.write('xd')
+router.route('/getGroups').post((req, res) => {
+    Teacher.findOne({key: sha256(req.body.key)},(error, data) => {
+        if(error) return error
+        try {
+            res.json(data.groups)
+        }
+        catch(TypeError){
+            res.json(null)
+        }
+    })
+})
+
+router.route('/getTeacher').post((req, res) => {
+    Teacher.find(req.body, (error, data) => {
+        if (error) return error
+        else return data
+    })
 })
 
 module.exports = router
