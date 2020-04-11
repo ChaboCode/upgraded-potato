@@ -8,7 +8,10 @@ class Selector extends Component {
     super(props)
 
     this.state = {
-      display: 'none'
+      style: {
+        display: 'none',
+      },
+      score: ''
     }
 
     this.score = createRef()
@@ -19,17 +22,23 @@ class Selector extends Component {
 
   show(row, col) {
     this.setState({
-      float: 'left',
-      top: (206 + ((row)*37)).toString() + 'px',
-      left: (394 + ((col - 1) * 28)).toString() + 'px',
-      display: 'block'
+      style: {
+        float: 'left',
+        top: (206 + ((row) * 37)).toString() + 'px',
+        left: (394 + ((col - 1) * 28)).toString() + 'px',
+        display: 'block'
+      },
+      score: ''
     })
     this.score.current.focus()
+    this.score.current.value = ''
   }
 
   hide() {
     this.setState({
-      display: 'none'
+      style: {
+        display: 'none',
+      }
     })
   }
 
@@ -38,10 +47,17 @@ class Selector extends Component {
     this.hide()
   }
 
+  handleChange(e) {
+    this.setState({
+      score: e.target.value
+    })
+  }
+
   render() {
     return (
-      <div id="selectorContainer" style={this.state}>
-        <input id="score" placeholder="Puntos" type="number" ref={this.score} />
+      <div id="selectorContainer" style={this.state.style}>
+        <input id="score" placeholder="Puntos" type="number" 
+        ref={this.score} onChange={e => this.handleChange(e)} />
         <button id="storeScore" onClick={e => this.handleEnterClick(e)}>OK</button>
       </div>
     )
