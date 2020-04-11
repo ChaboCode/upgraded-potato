@@ -27,8 +27,7 @@
 }
 
 .group {
-    position: relative;
-    left: 20px;
+    background-color: var(--gray-1);
     font-size: 20px;
     margin: 5px;
 }
