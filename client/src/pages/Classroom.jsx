@@ -6,11 +6,21 @@ import Table from '../components/Table'
 
 class Classrooom extends Component {
 
+    constructor(props) {
+        super(props)
+        this.groups = props.groups
+    }
+
     handleGroupClick(e) {
+        e.preventDefault()
         console.log('xd')
     }
 
-    render () {
+    render() {
+        let groups = this.groups.map(group => (
+        <li className="group" 
+            onClick={e => this.handleGroupClick(e)}><span>{group}</span></li>
+        ))
         return (
             <Fragment>
                 <header id="top-bar">
@@ -19,7 +29,8 @@ class Classrooom extends Component {
 
                 <aside id="groups">
                     <div className="sign">Grupos</div>
-                    <li className="group"><a onClick={e => this.handleGroupClick(e)}>1o A</a></li>
+                    {groups}
+                    {/* <li className="group"><span onClick={e => this.handleGroupClick(e)}>1o A</span></li> */}
                 </aside>
 
                 <nav id="tabs">
@@ -29,7 +40,7 @@ class Classrooom extends Component {
                 <div id="table">
                     <Table assignations={[1, 2, 3, 4]} students={['xd', 'xd']} />
                 </div>
-                </Fragment>
+            </Fragment>
         )
     }
 }

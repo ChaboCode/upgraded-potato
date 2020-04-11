@@ -22,27 +22,24 @@ class Home extends Component {
     async handleClick(e) {
         e.preventDefault()
         //TODO: implement this
-        const response = await axios.post('http://localhost:5000/teacher/getGroups', {key: this.state.key})
+        const response = await axios.post('http://localhost:5000/teacher/getGroups', { key: this.state.key })
         //console.log(response)
         const groups = response.data
-        console.log(groups)
-        let name = []
-        for(let i = 0; i < groups.lenght; ++i) {
-            name.push(await axios.post('http://localhost:5000/group/getNameById', {id: groups[i].group}))
+        let names = [], names_fr = []
+        for (let i = 0; i < groups.length; ++i) {
+            names_fr.push(await axios.post('http://localhost:5000/group/getNameById', { id: groups[i].group }))
         }
-        console.log(name)
+
+        names = names_fr.map(full_response => full_response.data)
+
+        console.log(names)
 
 
 
         this.setState({
             logged: true,
             data: {
-                groups: [
-                    '1a',
-                    '1b',
-                    '1d',
-                ]
-
+                groups: names
             }
         })
     }
@@ -57,22 +54,22 @@ class Home extends Component {
 
     render() {
         return this.state.logged ?
-        (
-            <Classroom />
-        )
-         : (
-            <div id="main-container">
-                <div id="top-bar">
-                    Kaerdos
+            (
+                <Classroom groups={this.state.data.groups} />
+            )
+            : (
+                <div id="main-container">
+                    <div id="top-bar">
+                        Kaerdos
                 </div>
-                <div id="container">
-                    <span id="hello">Bienvenido</span> <br/>
-                    <span id="message">Ingrese su clave</span> <br />
-                    <input onChange={this.handleChange} type="password" placeholder="Clave de profesor"/>
-                    <button onClick={e => this.handleClick(e)}>Entrar</button>
+                    <div id="container">
+                        <span id="hello">Bienvenido</span> <br />
+                        <span id="message">Ingrese su clave</span> <br />
+                        <input onChange={this.handleChange} type="password" placeholder="Clave de profesor" />
+                        <button onClick={e => this.handleClick(e)}>Entrar</button>
+                    </div>
                 </div>
-            </div>
-        )
+            )
     }
 }
 
