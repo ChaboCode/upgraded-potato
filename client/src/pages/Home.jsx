@@ -3,19 +3,15 @@ import axios from 'axios'
 import { sha256 } from 'js-sha256'
 
 import './css/Home.css'
-
 import Classroom from './Classroom'
 
 class Home extends Component {
-
     constructor(props) {
         super(props)
-
         this.state = {
             logged: false,
             key: ''
         }
-
         this.handleChange = this.handleChange.bind(this)
     }
 
@@ -25,17 +21,13 @@ class Home extends Component {
         const response = await axios.post('http://localhost:5000/teacher/getGroups', { key: this.state.key })
         //console.log(response)
         const groups = response.data
-        let names = [], names_fr = []
-        for (let i = 0; i < groups.length; ++i) {
-            names_fr.push(await axios.post('http://localhost:5000/group/getNameById', { id: groups[i].group }))
+        //console.log(groups)
+        let names = []
+        for (let key in groups) {
+            names.push(key)
         }
 
-        names = names_fr.map(full_response => full_response.data)
-
-        console.log(names)
-
-
-
+        //console.log(names)
         this.setState({
             logged: true,
             data: {
@@ -55,7 +47,7 @@ class Home extends Component {
     render() {
         return this.state.logged ?
             (
-                <Classroom groups={this.state.data.groups} />
+                <Classroom groups={this.state.data.groups} _key={this.state.key} />
             )
             : (
                 <div id="main-container">
