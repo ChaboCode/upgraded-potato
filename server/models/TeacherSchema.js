@@ -1,16 +1,19 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-let TeacherSchema = new Schema ({
+let TeachersSchema = new Schema ({
     key: {
         type: String
     },
     name: {
         type: String
     },
+    last: {
+        type: String
+    },
     groups: {
-        type: Array
+        type: Object
     }
 })
 
-module.exports = mongoose.model('Teachers', TeacherSchema, 'Teachers')
+module.exports = mongoose.model('Teachers', TeachersSchema, 'Teachers')

@@ -10,6 +10,9 @@ let GroupSchema = new Schema ({
     },
     teachers: {
         type: Array
+    },
+    s_names: {
+        type: Array
     }
 })
 
