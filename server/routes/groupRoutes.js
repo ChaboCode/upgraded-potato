@@ -11,4 +11,11 @@ router.route('/getNameById').post((req, res) => {
     })
 })
 
+router.route('/getStudentsByName').post((req, res) => {
+    Group.findOne({name: req.body.name}, (error, data) => {
+        if (error) throw error
+        res.json(data.s_names)
+    })
+})
+
 module.exports = router
