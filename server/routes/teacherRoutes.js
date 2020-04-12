@@ -3,14 +3,13 @@ let mongoose = require('mongoose'),
     router = express.Router(),
     sha256 = require('js-sha256').sha256
 
-let Teacher = require('../models/TeacherSchema')
+let Teachers = require('../models/TeacherSchema')
 
 router.route('/create').post((req, res) => {
-    Teacher.create(req.body, (error, data) => {
-        if(err) {
+    Teachers.create(req.body, (error, data) => {
+        if (err) {
             return next(error)
-        }
-        else {
+        } else {
             console.log(data)
             res.json(data)
         }
@@ -18,19 +17,33 @@ router.route('/create').post((req, res) => {
 })
 
 router.route('/getGroups').post((req, res) => {
-    Teacher.findOne({key: sha256(req.body.key)},(error, data) => {
-        if(error) return error
+    Teachers.find({
+        key: sha256(req.body.key)
+    }, (error, data) => {
+        if (error) return error
         try {
-            res.json(data.groups)
+            res.json(data[0].groups)
+        } catch (TypeError) {
+            res.json(null)
         }
-        catch(TypeError){
+    })
+})
+
+router.route('/getGroupRegisters').post(function (req, res) {
+    Teachers.find({
+        key: sha256(req.body.key).toString()
+    }, (error, data) => {
+        if (error) return error
+        try {
+            res.json(data[0].groups[req.body.group].reg)
+        } catch (TypeError) {
             res.json(null)
         }
     })
 })
 
 router.route('/getTeacher').post((req, res) => {
-    Teacher.find(req.body, (error, data) => {
+    Teachers.find(req.body, (error, data) => {
         if (error) return error
         else return data
     })
