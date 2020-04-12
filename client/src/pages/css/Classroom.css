@@ -30,6 +30,11 @@
     background-color: var(--gray-1);
     font-size: 20px;
     margin: 5px;
+    cursor: pointer;
+}
+
+.group:hover {
+    background-color: var(--gray-2);
 }
 
 /**************************
@@ -50,9 +55,14 @@
     border-top-left-radius: 20%;
     border-top-right-radius: 20%;
     margin-left: 6px;
+    cursor: pointer;
 
     position: relative;
     top:8px;
+}
+
+.tab:hover {
+    background-color: var(--gray-2);
 }
 
 
