@@ -23,12 +23,12 @@ class Row extends Component {
   }
 
   render() {
-    let deployRowCol = (row, col, colLenght) => {
-      const cells = document.getElementsByClassName('activitie')
-      // const cell = cells[colLenght * row + col]
-    }
+    //let deployRowCol = (row, col, colLenght) => {
+    //  const cells = document.getElementsByClassName('activitie')
+    //  // const cell = cells[colLenght * row + col]
+    //}
 
-    deployRowCol.cells = this.cells
+    //deployRowCol.cells = this.cells
 
     let row = []
     for (let i = 0; i < this.cells; ++i) {

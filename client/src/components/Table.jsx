@@ -10,7 +10,7 @@ class Table extends Component {
     const selector = createRef()
 
     const sup_regs = this.props.sup_regs
-    const cells = sup_regs.length
+    const cells = Object.getOwnPropertyNames(sup_regs).length
     const pstudents = this.props.students
     let students = []
 

@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import axios from 'axios'
-import {sha256} from 'js-sha256'
 
 import './css/Classroom.css'
 
@@ -23,15 +22,12 @@ class Classrooom extends Component {
     async handleGroupClick(e, group) {
         e.preventDefault()
         const students = await axios.post('http://localhost:5000/group/getStudentsByName', {name: group})
+        console.log(students.data)
         
-        const groups = await axios.post('http://localhost:5000/teacher/getGroupRegisters', {key: this.key, group: group})
-        const sup_regs = []
-        for(let key in groups.data["Actividades"]) {
-            sup_regs.push(key)
-        }
-
+        const sup_regs = await axios.post('http://localhost:5000/teacher/getGroupRegisters', {key: this.key, group: group})
+        console.log(sup_regs)
         this.setState({
-            sup_regs: sup_regs,
+            sup_regs: sup_regs.data.Actividades,
             students: students.data
         })
         this.render()
