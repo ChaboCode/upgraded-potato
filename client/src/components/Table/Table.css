@@ -31,7 +31,7 @@ table {
 
 .assignament {
   height: 80px;
-  max-width: 24px;
+  max-width: 20px;
   padding: 6px;
 }
 
@@ -41,6 +41,12 @@ table {
   top: 27px;
   display: block;
   white-space: nowrap;
-  font-size: 14px;
-  font-style: normal;
+}
+
+.assignament>div>span {
+    font-size: 15px;
+}
+
+.assignament>div>span:hover {
+    cursor: pointer;
 }
