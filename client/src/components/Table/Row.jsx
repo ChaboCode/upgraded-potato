@@ -17,27 +17,15 @@ class Row extends Component {
     return cell
   }
 
-  handleClick(e, row, col, colLenght) {
+  handleClick(e, row, col) {
     e.preventDefault()
     this.selector.current.show(row, col)
-  }
-
-  handleOnMouseEnter(e, row, col, colLenght) {
-    e.preventDefault()
-    const cell = this.getCell(e, row, col, colLenght)
-    cell.style.backgroundColor = '#444'
-  }
-
-  handleOnMouseLeave(e, row, col, colLenght) {
-    e.preventDefault()
-    const cell = this.getCell(e, row, col, colLenght)
-    cell.style.backgroundColor = '#333'
   }
 
   render() {
     let deployRowCol = (row, col, colLenght) => {
       const cells = document.getElementsByClassName('activitie')
-      const cell = cells[colLenght * row + col]
+      // const cell = cells[colLenght * row + col]
     }
 
     deployRowCol.cells = this.cells
@@ -50,12 +38,6 @@ class Row extends Component {
           row={this.rowNumber}
           col={i}
           onClick={e => this.handleClick(e, this.rowNumber, i, this.cells)}
-          onMouseEnter={e =>
-            this.handleOnMouseEnter(e, this.rowNumber, i, this.cells)
-          }
-          onMouseLeave={e =>
-            this.handleOnMouseLeave(e, this.rowNumber, i, this.cells)
-          }
         />
       )
     }

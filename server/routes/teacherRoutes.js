@@ -31,11 +31,11 @@ router.route('/getGroups').post((req, res) => {
 
 router.route('/getGroupRegisters').post(function (req, res) {
     Teachers.find({
-        key: sha256(req.body.key).toString()
+        key: sha256(req.body.key)
     }, (error, data) => {
         if (error) return error
         try {
-            res.json(data[0].groups[req.body.group].reg)
+            res.json(data[0].groups[req.body.group].regs)
         } catch (TypeError) {
             res.json(null)
         }

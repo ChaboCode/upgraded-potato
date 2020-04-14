@@ -1,4 +1,6 @@
 import React, { Component, Fragment } from 'react'
+import axios from 'axios'
+import {sha256} from 'js-sha256'
 
 import './css/Classroom.css'
 
@@ -9,18 +11,40 @@ class Classrooom extends Component {
     constructor(props) {
         super(props)
         this.groups = props.groups
+        this.key = this.props._key
+
+        this.state = {
+            students: [],
+            sup_regs: []
+        }
+        this.handleGroupClick = this.handleGroupClick.bind(this)
     }
 
-    handleGroupClick(e) {
+    async handleGroupClick(e, group) {
         e.preventDefault()
-        console.log('xd')
+        const students = await axios.post('http://localhost:5000/group/getStudentsByName', {name: group})
+        
+        const groups = await axios.post('http://localhost:5000/teacher/getGroupRegisters', {key: this.key, group: group})
+        const sup_regs = []
+        for(let key in groups.data["Actividades"]) {
+            sup_regs.push(key)
+        }
+
+        this.setState({
+            sup_regs: sup_regs,
+            students: students.data
+        })
+        this.render()
     }
 
     render() {
-        let groups = this.groups.map(group => (
-        <li className="group" 
-            onClick={e => this.handleGroupClick(e)}><span>{group}</span></li>
-        ))
+        let groups = this.groups.map(group => {
+           // console.log(group)
+            return (
+            <li className="group" 
+                onClick={(e) => this.handleGroupClick(e, group)}><span>{group}</span></li>
+            )
+        })
         return (
             <Fragment>
                 <header id="top-bar">
@@ -30,7 +54,6 @@ class Classrooom extends Component {
                 <aside id="groups">
                     <div className="sign">Grupos</div>
                     {groups}
-                    {/* <li className="group"><span onClick={e => this.handleGroupClick(e)}>1o A</span></li> */}
                 </aside>
 
                 <nav id="tabs">
@@ -38,7 +61,7 @@ class Classrooom extends Component {
                     <span className="tab">Trabajos</span>
                 </nav>
                 <div id="table">
-                    <Table assignations={[1, 2, 3, 4]} students={['xd', 'xd']} />
+                    <Table sup_regs={this.state.sup_regs} students={this.state.students} />
                 </div>
             </Fragment>
         )
@@ -46,3 +69,4 @@ class Classrooom extends Component {
 }
 
 export default Classrooom
+
