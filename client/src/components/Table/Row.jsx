@@ -8,6 +8,21 @@ class Row extends Component {
     this.student = this.props.student
     this.rowNumber = this.props.rowNumber
     this.selector = this.props.selector
+    this.regs = []
+
+    for(let key in this.props.regs) {
+        this.regs.push(this.props.regs[key].regs[this.rowNumber])
+        console.log(this.regs)
+    }
+
+    for(let i = 0; i < this.regs.length; ++i) {
+      if(this.regs[i] === true) {
+        this.regs[i] = -1
+      }
+      else if(this.regs[i] === false) {
+        this.regs[i] = -2
+      }
+    }
   }
 
   getCell(e, row, col, colLenght) {
@@ -23,13 +38,6 @@ class Row extends Component {
   }
 
   render() {
-    //let deployRowCol = (row, col, colLenght) => {
-    //  const cells = document.getElementsByClassName('activitie')
-    //  // const cell = cells[colLenght * row + col]
-    //}
-
-    //deployRowCol.cells = this.cells
-
     let row = []
     for (let i = 0; i < this.cells; ++i) {
       row.push(
@@ -38,7 +46,9 @@ class Row extends Component {
           row={this.rowNumber}
           col={i}
           onClick={e => this.handleClick(e, this.rowNumber, i, this.cells)}
-        />
+          > 
+          {parseInt(this.regs[i])}
+        </td>
       )
     }
 

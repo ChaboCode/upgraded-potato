@@ -13,8 +13,8 @@ class Classrooom extends Component {
         this.key = this.props._key
 
         this.state = {
-            students: [],
-            sup_regs: []
+            students: null,
+            sup_regs: null
         }
         this.handleGroupClick = this.handleGroupClick.bind(this)
     }
@@ -22,10 +22,8 @@ class Classrooom extends Component {
     async handleGroupClick(e, group) {
         e.preventDefault()
         const students = await axios.post('http://localhost:5000/group/getStudentsByName', {name: group})
-        console.log(students.data)
         
         const sup_regs = await axios.post('http://localhost:5000/teacher/getGroupRegisters', {key: this.key, group: group})
-        console.log(sup_regs)
         this.setState({
             sup_regs: sup_regs.data.Actividades,
             students: students.data
@@ -35,7 +33,6 @@ class Classrooom extends Component {
 
     render() {
         let groups = this.groups.map(group => {
-           // console.log(group)
             return (
             <li className="group" 
                 onClick={(e) => this.handleGroupClick(e, group)}><span>{group}</span></li>
@@ -56,9 +53,13 @@ class Classrooom extends Component {
                     <span className="tab">Asistencias</span>
                     <span className="tab">Trabajos</span>
                 </nav>
-                <div id="table">
-                    <Table sup_regs={this.state.sup_regs} students={this.state.students} />
-                </div>
+                {this.state.students != null ? (
+                        <div id="table">
+                            <Table sup_regs={this.state.sup_regs} students={this.state.students} />
+                        </div>
+                        ) : <></>
+                }
+                
             </Fragment>
         )
     }

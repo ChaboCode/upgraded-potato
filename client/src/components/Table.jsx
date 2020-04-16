@@ -15,7 +15,7 @@ class Table extends Component {
     let students = []
 
     for (let i = 0; i < pstudents.length; ++i) {
-      students.push(<Row student={pstudents[i]} cells={cells} rowNumber={i} selector={selector} />)
+      students.push(<Row student={pstudents[i]} cells={cells} rowNumber={i} selector={selector} regs={sup_regs}/>)
     }
     
     const hrow = <HeaderRow data={sup_regs} />
