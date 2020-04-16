@@ -9,26 +9,25 @@ class Table extends Component {
   render() {
     const selector = createRef()
 
-    const assignations = this.props.assignations
-    const cells = assignations.length
+    const sup_regs = this.props.sup_regs
+    const cells = Object.getOwnPropertyNames(sup_regs).length
     const pstudents = this.props.students
     let students = []
 
     for (let i = 0; i < pstudents.length; ++i) {
-      students.push(<Row student={pstudents[i]} cells={cells} rowNumber={i} selector={selector} />)
+      students.push(<Row student={pstudents[i]} cells={cells} rowNumber={i} selector={selector} regs={sup_regs}/>)
     }
     
-    const hrow = <HeaderRow data={assignations} />
+    const hrow = <HeaderRow data={sup_regs} />
     
     ///////////////////////////////////////
     return (
       <Fragment>
+      <Selector ref={selector} />
         <table border="1px solid">
           <thead>{hrow}</thead>
           <tbody>{students}</tbody>
-          <Selector ref={selector} />
         </table>
-        <Selector />
       </Fragment>
     )
   }

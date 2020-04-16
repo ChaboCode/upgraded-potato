@@ -35,6 +35,9 @@ input {
 }
 
 button {
+    background: none;
+    cursor: pointer;
+
     position: relative;
     top: 270px;
     left: -145px;
