@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, {Component} from 'react'
 import axios from 'axios'
-import { sha256 } from 'js-sha256'
+import {sha256} from 'js-sha256'
 
 import './css/Home.css'
 import Classroom from './Classroom'
@@ -17,17 +17,13 @@ class Home extends Component {
 
     async handleClick(e) {
         e.preventDefault()
-        //TODO: implement this
-        const response = await axios.post('http://localhost:5000/teacher/getGroups', { key: this.state.key })
-        //console.log(response)
+        const response = await axios.post('http://localhost:5000/teacher/getGroups', {key: this.state.key})
         const groups = response.data
-        //console.log(groups)
         let names = []
         for (let key in groups) {
             names.push(key)
         }
 
-        //console.log(names)
         this.setState({
             logged: true,
             data: {
@@ -47,17 +43,17 @@ class Home extends Component {
     render() {
         return this.state.logged ?
             (
-                <Classroom groups={this.state.data.groups} _key={this.state.key} />
+                <Classroom groups={this.state.data.groups} _key={this.state.key}/>
             )
             : (
                 <div id="main-container">
                     <div id="top-bar">
                         Kaerdos
-                </div>
+                    </div>
                     <div id="container">
-                        <span id="hello">Bienvenido</span> <br />
-                        <span id="message">Ingrese su clave</span> <br />
-                        <input onChange={this.handleChange} type="password" placeholder="Clave de profesor" />
+                        <span id="hello">Bienvenido</span> <br/>
+                        <span id="message">Ingrese su clave</span> <br/>
+                        <input onChange={this.handleChange} type="password" placeholder="Clave de profesor"/>
                         <button onClick={e => this.handleClick(e)}>Entrar</button>
                     </div>
                 </div>

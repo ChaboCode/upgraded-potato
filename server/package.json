@@ -12,11 +12,14 @@
     "mongoose": "5.9.7"
   },
   "devDependencies": {
-    "chai": "^4.2.0"
+    "@shelf/jest-mongodb": "^1.1.5",
+    "chai": "^4.2.0",
+    "jest": "^25.3.0",
+    "nock": "^12.0.3"
   },
   "scripts": {
-    "test": "mocha",
-    "start": "npx pm2 start server.js",
+    "test": "jest --detectOpenHandles",
+    "start": "pm2 start server.js",
     "dev": "npx nodemon server.js",
     "debug": "npx nodemon --debug server.js"
   },

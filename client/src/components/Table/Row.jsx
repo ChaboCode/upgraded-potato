@@ -12,7 +12,6 @@ class Row extends Component {
 
     for(let key in this.props.regs) {
         this.regs.push(this.props.regs[key].regs[this.rowNumber])
-        console.log(this.regs)
     }
 
     for(let i = 0; i < this.regs.length; ++i) {
@@ -27,7 +26,7 @@ class Row extends Component {
 
   getCell(e, row, col, colLenght) {
     e.preventDefault()
-    const cells = document.getElementsByClassName('activitie')
+    const cells = document.getElementsByClassName('activity')
     const cell = cells[colLenght * row + col]
     return cell
   }
@@ -42,12 +41,12 @@ class Row extends Component {
     for (let i = 0; i < this.cells; ++i) {
       row.push(
         <td
-          className="activitie"
+          className="activity"
           row={this.rowNumber}
           col={i}
           onClick={e => this.handleClick(e, this.rowNumber, i, this.cells)}
           > 
-          {parseInt(this.regs[i])}
+          {this.regs[i]}
         </td>
       )
     }

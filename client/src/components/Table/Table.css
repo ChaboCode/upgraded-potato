@@ -4,14 +4,13 @@ table {
   text-align: center;
 }
 
-/* TODO */
-.activitie {
+.activity {
   width: 10px;
   height: 34px;
   background-color: inherit;
 }
 
-.activitie:hover {
+.activity:hover {
   background-color: #444;
 }
 
@@ -29,13 +28,13 @@ table {
   font-size: 24px;
 }
 
-.assignament {
+.assignment {
   height: 80px;
   max-width: 20px;
   padding: 6px;
 }
 
-.assignament>div {
+.assignment>div {
   transform: rotate(-90deg);
   position: relative;
   top: 27px;
@@ -43,10 +42,26 @@ table {
   white-space: nowrap;
 }
 
-.assignament>div>span {
-    font-size: 15px;
+.assignment>div>span {
+  font-size: 15px;
 }
 
-.assignament>div>span:hover {
-    cursor: pointer;
+.assignment>div>span:hover {
+  cursor: pointer;
 }
+
+.add-assign{
+  
+}
+
+.add-assign:hover {
+    background-color: var(--gray-1);
+}
+
+#add-new-reg {
+    top: 0;
+    left: -6px;
+    font-size: 15px;
+    width: 80px;
+}  
+

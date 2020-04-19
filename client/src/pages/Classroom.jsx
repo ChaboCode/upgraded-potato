@@ -13,10 +13,13 @@ class Classrooom extends Component {
         this.key = this.props._key
 
         this.state = {
-            students: null,
-            sup_regs: null
+            group: '',
+            students: [],
+            sup_regs: [],
+            update: false
         }
         this.handleGroupClick = this.handleGroupClick.bind(this)
+        this.updateGroup = this.updateGroup.bind(this)
     }
 
     async handleGroupClick(e, group) {
@@ -25,10 +28,21 @@ class Classrooom extends Component {
         
         const sup_regs = await axios.post('http://localhost:5000/teacher/getGroupRegisters', {key: this.key, group: group})
         this.setState({
-            sup_regs: sup_regs.data.Actividades,
-            students: students.data
+            sup_regs: sup_regs.data.Actividades, //TODO
+            students: students.data,
+            group: group
         })
-        this.render()
+    }
+
+    async updateGroup(group) {
+        const students = await axios.post('http://localhost:5000/group/getStudentsByName', {name: group})
+        
+        const sup_regs = await axios.post('http://localhost:5000/teacher/getGroupRegisters', {key: this.key, group: group})
+        this.setState({
+            sup_regs: sup_regs.data.Actividades, //TODO
+            students: students.data,
+            group: group
+        })
     }
 
     render() {
@@ -38,6 +52,12 @@ class Classrooom extends Component {
                 onClick={(e) => this.handleGroupClick(e, group)}><span>{group}</span></li>
             )
         })
+        const data = {
+            group: this.state.group,
+            teacher: this.key,
+            group_length: this.state.students.length,
+            update: this.updateGroup
+        }
         return (
             <Fragment>
                 <header id="top-bar">
@@ -53,13 +73,9 @@ class Classrooom extends Component {
                     <span className="tab">Asistencias</span>
                     <span className="tab">Trabajos</span>
                 </nav>
-                {this.state.students != null ? (
                         <div id="table">
-                            <Table sup_regs={this.state.sup_regs} students={this.state.students} />
+                            <Table sup_regs={this.state.sup_regs} students={this.state.students} data={data} />
                         </div>
-                        ) : <></>
-                }
-                
             </Fragment>
         )
     }

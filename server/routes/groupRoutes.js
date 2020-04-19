@@ -1,5 +1,4 @@
-const mongoose = require('mongoose'),
-      express = require('express'),
+const express = require('express'),
       router = express.Router()
 
 const Group = require('../models/GroupSchema')
@@ -17,5 +16,15 @@ router.route('/getStudentsByName').post((req, res) => {
         res.json(data.s_names)
     })
 })
+
+//router.route('/getTotalStudents').post((req, res) => {
+//    console.log(req.body)
+//    //Group.findOne({name: req.body.group}, (error, data) => {
+//    //    if (error) throw error
+//    //    console.log(data)
+//    //    //res.json(data.s_names.length)
+//    //    res.send(data.s_names.length)
+//    //})
+//})
 
 module.exports = router
