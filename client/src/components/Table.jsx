@@ -6,6 +6,7 @@ import './Table/Table.css'
 import Selector from './Selector/Selector'
 
 class Table extends Component {
+
   render() {
     const selector = createRef()
 

@@ -7,7 +7,6 @@ class Row extends Component {
     this.cells = this.props.cells
     this.student = this.props.student
     this.rowNumber = this.props.rowNumber
-    this.selector = this.props.selector
     this.regs = []
 
     for(let key in this.props.regs) {
@@ -24,16 +23,9 @@ class Row extends Component {
     }
   }
 
-  getCell(e, row, col, colLenght) {
-    e.preventDefault()
-    const cells = document.getElementsByClassName('activity')
-    const cell = cells[colLenght * row + col]
-    return cell
-  }
-
   handleClick(e, row, col) {
     e.preventDefault()
-    this.selector.current.show(row, col)
+    this.props.selector.current.show(row, col)
   }
 
   render() {
