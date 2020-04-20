@@ -40,7 +40,7 @@ router.route('/addNewGroupRegister').post((req, res) => {
     }, async (error, data) => {
         if (error) throw error
         //TODO: Implement for diferents regs
-        new_regs = []
+        let new_regs = []
         for(let i = 0; i < group_length; i++) {
             new_regs.push('')
         }
@@ -51,6 +51,24 @@ router.route('/addNewGroupRegister').post((req, res) => {
         data.markModified('groups')
         await data.save()
         res.json('xd')
+    })
+})
+
+router.route('/updateRegisterOnIndex', (req, res) => {
+    const teacher = req.body.teacher,
+          student = req.body.student,
+          reg = req.body.reg,
+          group = req.body.group,
+          sup_reg = req.body.sup_reg,
+          points = req.body.points
+
+    Teachers.findOne({
+        key: sha256(teacher)
+    }, async (err, data) => {
+        if (err) throw err
+
+        data.groups[group].regs[sup_reg][reg].regs[student] = points
+        await data.save()
     })
 })
 
