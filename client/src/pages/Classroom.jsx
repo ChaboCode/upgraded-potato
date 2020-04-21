@@ -5,11 +5,11 @@ import './css/Classroom.css'
 
 import Table from '../components/Table'
 
-class Classrooom extends Component {
+class Classroom extends Component {
 
     constructor(props) {
         super(props)
-        this.groups = props.groups
+        this.groups = this.props.groups
         this.key = this.props._key
 
         this.state = {
@@ -81,5 +81,5 @@ class Classrooom extends Component {
     }
 }
 
-export default Classrooom
+export default Classroom
 
