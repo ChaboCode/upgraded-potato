@@ -12,9 +12,10 @@ class HeaderRow extends Component {
     }
     this.escFunction = this.escFunction.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
+    this.handleInputBlur = this.handleInputBlur.bind(this)
   }
 
-  handleNewClick(e) {
+  handleNewClick(_e) {
     this.setState({addNew: true})
   }
 
@@ -35,6 +36,7 @@ class HeaderRow extends Component {
   }
 
   async escFunction(e) {
+
     e.preventDefault()
     if (e.key === 'Escape') {
       this.setState({addNew: false})
@@ -45,6 +47,11 @@ class HeaderRow extends Component {
       console.log('xd2')
       this.setState({addNew: false, value: ''})
     }
+  }
+
+  handleInputBlur(e) {
+    e.preventDefault()
+    this.setState({addNew: false})
   }
 
   render() {
@@ -68,7 +75,8 @@ class HeaderRow extends Component {
           <td className="assignment add-assign" onClick={e => this.handleNewClick(e)}>
             <div>
               <input id="add-new-reg" placeholder="Actividad..." onKeyUp={this.escFunction}
-                     onChange={this.handleInputChange} value={this.state.value} autoFocus/>
+                     onChange={this.handleInputChange} onBlur={this.handleInputBlur}
+                     value={this.state.value} autoFocus/>
             </div>
           </td>
       )

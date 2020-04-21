@@ -1,4 +1,4 @@
-import React, { Component, Fragment, createRef } from 'react'
+import React, { Component, createRef } from 'react'
 
 import Row from './Table/Row'
 import HeaderRow from './Table/HeaderRow'
@@ -7,29 +7,45 @@ import Selector from './Selector/Selector'
 
 class Table extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      sup_regs: this.props.sup_regs,
+      students: this.props.students,
+      cells: Object.getOwnPropertyNames(this.props.sup_regs).length
+    }
+  }
+
+  static getDerivedStateFromProps(nextProps, _prevState) {
+    return {
+      sup_regs: nextProps.sup_regs,
+      students: nextProps.students,
+      cells: Object.getOwnPropertyNames(nextProps.sup_regs).length
+    }
+  }
+
   render() {
     const selector = createRef()
 
-    const sup_regs = this.props.sup_regs
-    const cells = Object.getOwnPropertyNames(sup_regs).length
-    const pstudents = this.props.students
     let students = []
 
-    for (let i = 0; i < pstudents.length; ++i) {
-      students.push(<Row student={pstudents[i]} cells={cells} rowNumber={i} selector={selector} regs={sup_regs}/>)
+    for (let i = 0; i < this.state.students.length; ++i) {
+      students.push(<Row student={this.state.students[i]} cells={this.state.cells}
+                         rowNumber={i} selector={selector}
+                         regs={this.state.sup_regs} />)
     }
     
-    const hrow = <HeaderRow regs={sup_regs} data={this.props.data}  />
+    const hrow = <HeaderRow regs={this.state.sup_regs} data={this.props.data}  />
     
     ///////////////////////////////////////
     return (
-      <Fragment>
-      <Selector ref={selector} />
-        <table border="1px solid">
-          <thead>{hrow}</thead>
-          <tbody>{students}</tbody>
-        </table>
-      </Fragment>
+      <>
+        <Selector ref={selector} data={this.props.data} />
+          <table border="1px solid">
+            <thead>{hrow}</thead>
+            <tbody>{students}</tbody>
+          </table>
+      </>
     )
   }
 }

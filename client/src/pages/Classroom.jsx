@@ -86,4 +86,3 @@ class Classroom extends Component {
 }
 
 export default Classroom
-
