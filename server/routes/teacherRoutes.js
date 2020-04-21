@@ -16,7 +16,7 @@ router.route('/getGroups').post((req, res) => {
     })
 })
 
-router.route('/getGroupRegisters').post(function (req, res) {
+router.route('/getGroupRegisters').post((req, res) => {
     Teachers.find({
         key: sha256(req.body.key)
     }, (error, data) => {
@@ -29,6 +29,10 @@ router.route('/getGroupRegisters').post(function (req, res) {
     })
 })
 
+router.route('/getGroupRegisters/asList').post((req, res) => {
+    //TODO
+})
+
 router.route('/addNewGroupRegister').post((req, res) => {
     const teacher = req.body.key,
           group = req.body.group,
@@ -39,7 +43,7 @@ router.route('/addNewGroupRegister').post((req, res) => {
         key: sha256(teacher)
     }, async (error, data) => {
         if (error) throw error
-        //TODO: Implement for diferents regs
+        //TODO: Implement for different regs
         let new_regs = []
         for(let i = 0; i < group_length; i++) {
             new_regs.push('')
@@ -54,7 +58,7 @@ router.route('/addNewGroupRegister').post((req, res) => {
     })
 })
 
-router.route('/updateRegisterOnIndex', (req, res) => {
+router.route('/updateRegisterOnIndex').post((req, res) => {
     const teacher = req.body.teacher,
           student = req.body.student,
           reg = req.body.reg,
