@@ -44,6 +44,7 @@ class Selector extends Component {
 
   handleEnterClick(e) {
     e.preventDefault()
+    //TODO
     this.hide()
   }
 
