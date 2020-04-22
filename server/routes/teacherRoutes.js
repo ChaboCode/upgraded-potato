@@ -29,10 +29,6 @@ router.route('/getGroupRegisters').post((req, res) => {
     })
 })
 
-router.route('/getGroupRegisters/asList').post((req, res) => {
-    //TODO
-})
-
 router.route('/addNewGroupRegister').post((req, res) => {
     const teacher = req.body.key,
           group = req.body.group,
@@ -69,11 +65,15 @@ router.route('/updateRegisterOnIndex').post((req, res) => {
     Teachers.findOne({
         key: sha256(teacher)
     }, async (err, data) => {
-        if (err) throw err
+        if (err){
+            res.json({done: false})
+            throw err
+        }
 
         data.groups[group].regs[sup_reg][reg].regs[student] = points
         await data.save()
     })
+    res.json({done: true})
 })
 
 module.exports = router
