@@ -1,7 +1,6 @@
 version: 2.1
 executors:
   client:
-    name: node/default
     working_directory: './client'
 orbs:
   node: circleci/node@1.1.6
