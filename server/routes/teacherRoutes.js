@@ -17,12 +17,13 @@ router.route('/getGroups').post((req, res) => {
 })
 
 router.route('/getGroupRegisters').post((req, res) => {
-    Teachers.find({
+    Teachers.findOne({
         key: sha256(req.body.key)
     }, (error, data) => {
         if (error) return error
         try {
-            res.json(data[0].groups[req.body.group].regs)
+            res.json(data.groups[req.body.group].regs[req.body.reg ||
+            Object.getOwnPropertyNames(data.groups[req.body.group].regs)[0]])
         } catch (TypeError) {
             res.json(null)
         }
@@ -33,6 +34,7 @@ router.route('/addNewGroupRegister').post((req, res) => {
     const teacher = req.body.key,
           group = req.body.group,
           group_length = req.body.group_length,
+          reg = req.body.reg,
           new_reg = req.body.new_reg
 
     Teachers.findOne({
@@ -44,7 +46,7 @@ router.route('/addNewGroupRegister').post((req, res) => {
         for(let i = 0; i < group_length; i++) {
             new_regs.push('')
         }
-        data.groups[group].regs.Actividades[new_reg] = {
+        data.groups[group].regs[reg][new_reg] = {
             desc: '',
             regs: new_regs
         }
@@ -70,10 +72,21 @@ router.route('/updateRegisterOnIndex').post((req, res) => {
             throw err
         }
 
-        data.groups[group].regs[sup_reg][reg].regs[student] = points
+        const register = Object.getOwnPropertyNames(data.groups[group].regs[sup_reg])[reg]
+        data.groups[group].regs[sup_reg][register].regs[student] = points
+        data.markModified('groups')
         await data.save()
     })
     res.json({done: true})
+})
+
+router.route('/getTabs').post((req, res) => {
+    Teachers.findOne({
+        key: sha256(req.body.key)
+    }, (err, data) => {
+        if (err) throw err
+        res.json(Object.getOwnPropertyNames(data.groups[req.body.group].regs))
+    })
 })
 
 module.exports = router

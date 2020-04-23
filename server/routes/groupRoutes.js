@@ -17,14 +17,4 @@ router.route('/getStudentsByName').post((req, res) => {
     })
 })
 
-//router.route('/getTotalStudents').post((req, res) => {
-//    console.log(req.body)
-//    //Group.findOne({name: req.body.group}, (error, data) => {
-//    //    if (error) throw error
-//    //    console.log(data)
-//    //    //res.json(data.s_names.length)
-//    //    res.send(data.s_names.length)
-//    //})
-//})
-
 module.exports = router

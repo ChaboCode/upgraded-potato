@@ -20,10 +20,12 @@ class HeaderRow extends Component {
   }
 
   async newRegister(reg) {
+    console.log(this.props.data.reg)
     await axios.post('http://localhost:5000/teacher/addNewGroupRegister', {
       key: this.props.data.teacher,
       group: this.props.data.group,
       group_length: this.props.data.group_length,
+      reg: this.props.data.reg,
       new_reg: reg
     })
     this.props.data.update(this.props.data.group)
