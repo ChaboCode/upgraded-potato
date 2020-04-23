@@ -6,7 +6,7 @@ jobs:
     executor:
       name: node/default
     steps:
-      - working-directory: ./client
+      - working_directory: ./client
       - checkout
       - node/with-cache:
           steps:
