@@ -1,6 +1,6 @@
 const assert = require('chai').assert,
       Teachers = require('../models/TeacherSchema'),
-      db = require('../database/db').db
+      db = require('../database/db').db,
       mongoose = require('mongoose'),
       sha256 = require('js-sha256').sha256
 
