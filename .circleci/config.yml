@@ -2,6 +2,8 @@ version: 2.1
 executors:
   client:
     working_directory: './client'
+    machine: 
+      image: ubuntu-1604:201903-01
 orbs:
   node: circleci/node@1.1.6
 jobs:
