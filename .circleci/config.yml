@@ -5,8 +5,8 @@ jobs:
   build-and-test-client:
     executor:
       name: node/default
+      working_directory: './client'
     steps:
-      - working_directory: ./client
       - checkout
       - node/with-cache:
           steps:
