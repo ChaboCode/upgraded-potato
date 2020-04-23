@@ -1,20 +1,7 @@
-let mongoose = require('mongoose'),
-    express = require('express'),
+const express = require('express'),
     router = express.Router(),
-    sha256 = require('js-sha256').sha256
-
-let Teachers = require('../models/TeacherSchema')
-
-router.route('/create').post((req, res) => {
-    Teachers.create(req.body, (error, data) => {
-        if (err) {
-            return next(error)
-        } else {
-            console.log(data)
-            res.json(data)
-        }
-    })
-})
+    sha256 = require('js-sha256').sha256,
+    Teachers = require('../models/TeacherSchema')
 
 router.route('/getGroups').post((req, res) => {
     Teachers.find({
@@ -29,23 +16,76 @@ router.route('/getGroups').post((req, res) => {
     })
 })
 
-router.route('/getGroupRegisters').post(function (req, res) {
-    Teachers.find({
+router.route('/getGroupRegisters').post((req, res) => {
+    Teachers.findOne({
         key: sha256(req.body.key)
     }, (error, data) => {
         if (error) return error
         try {
-            res.json(data[0].groups[req.body.group].regs)
+            res.json(data.groups[req.body.group].regs[req.body.reg ||
+            Object.getOwnPropertyNames(data.groups[req.body.group].regs)[0]])
         } catch (TypeError) {
             res.json(null)
         }
     })
 })
 
-router.route('/getTeacher').post((req, res) => {
-    Teachers.find(req.body, (error, data) => {
-        if (error) return error
-        else return data
+router.route('/addNewGroupRegister').post((req, res) => {
+    const teacher = req.body.key,
+          group = req.body.group,
+          group_length = req.body.group_length,
+          reg = req.body.reg,
+          new_reg = req.body.new_reg
+
+    Teachers.findOne({
+        key: sha256(teacher)
+    }, async (error, data) => {
+        if (error) throw error
+        //TODO: Implement for different regs
+        let new_regs = []
+        for(let i = 0; i < group_length; i++) {
+            new_regs.push('')
+        }
+        data.groups[group].regs[reg][new_reg] = {
+            desc: '',
+            regs: new_regs
+        }
+        data.markModified('groups')
+        await data.save()
+        res.json('xd')
+    })
+})
+
+router.route('/updateRegisterOnIndex').post((req, res) => {
+    const teacher = req.body.teacher,
+          student = req.body.student,
+          reg = req.body.reg,
+          group = req.body.group,
+          sup_reg = req.body.sup_reg,
+          points = req.body.points
+
+    Teachers.findOne({
+        key: sha256(teacher)
+    }, async (err, data) => {
+        if (err){
+            res.json({done: false})
+            throw err
+        }
+
+        const register = Object.getOwnPropertyNames(data.groups[group].regs[sup_reg])[reg]
+        data.groups[group].regs[sup_reg][register].regs[student] = points
+        data.markModified('groups')
+        await data.save()
+    })
+    res.json({done: true})
+})
+
+router.route('/getTabs').post((req, res) => {
+    Teachers.findOne({
+        key: sha256(req.body.key)
+    }, (err, data) => {
+        if (err) throw err
+        res.json(Object.getOwnPropertyNames(data.groups[req.body.group].regs))
     })
 })
 

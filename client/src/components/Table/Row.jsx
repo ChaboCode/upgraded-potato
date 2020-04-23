@@ -4,57 +4,74 @@ class Row extends Component {
   constructor(props) {
     super(props)
 
-    this.cells = this.props.cells
-    this.student = this.props.student
-    this.rowNumber = this.props.rowNumber
-    this.selector = this.props.selector
-    this.regs = []
-
+    let regs = []
     for(let key in this.props.regs) {
-        this.regs.push(this.props.regs[key].regs[this.rowNumber])
-        console.log(this.regs)
+        regs.push(this.props.regs[key].regs[this.rowNumber])
     }
 
-    for(let i = 0; i < this.regs.length; ++i) {
-      if(this.regs[i] === true) {
-        this.regs[i] = -1
+    for(let i = 0; i < regs.length; ++i) {
+      if(regs[i] === true) {
+        regs[i] = -1
       }
-      else if(this.regs[i] === false) {
-        this.regs[i] = -2
+      else if(regs[i] === false) {
+        regs[i] = -2
       }
+    }
+
+    this.state = {
+      cells: this.props.cells,
+      student: this.props.student,
+      rowNumber: this.props.rowNumber,
+      regs: regs
     }
   }
 
-  getCell(e, row, col, colLenght) {
-    e.preventDefault()
-    const cells = document.getElementsByClassName('activitie')
-    const cell = cells[colLenght * row + col]
-    return cell
+  static getDerivedStateFromProps(nextProps, _prevState) {
+    let regs = []
+    for(let key in nextProps.regs) {
+      regs.push(nextProps.regs[key].regs[nextProps.rowNumber])
+    }
+
+    for(let i = 0; i < regs.length; ++i) {
+      if(regs[i] === true) {
+        regs[i] = -1
+      }
+      else if(regs[i] === false) {
+        regs[i] = -2
+      }
+    }
+
+    return {
+      cells: nextProps.cells,
+      student: nextProps.student,
+      rowNumber: nextProps.rowNumber,
+      regs: regs
+    }
   }
 
   handleClick(e, row, col) {
     e.preventDefault()
-    this.selector.current.show(row, col)
+    this.props.selector.current.show(row, col)
   }
 
   render() {
     let row = []
-    for (let i = 0; i < this.cells; ++i) {
+    for (let i = 0; i < this.state.cells; ++i) {
       row.push(
         <td
-          className="activitie"
-          row={this.rowNumber}
+          className="activity"
+          row={this.state.rowNumber}
           col={i}
-          onClick={e => this.handleClick(e, this.rowNumber, i, this.cells)}
+          onClick={e => this.handleClick(e, this.state.rowNumber, i, this.state.cells)}
           > 
-          {parseInt(this.regs[i])}
+          {this.state.regs[i]}
         </td>
       )
     }
 
-    return <Fragment key={this.rowNumber}>
+    return <Fragment key={this.state.rowNumber}>
         <tr>
-          <td className="name">{this.student}</td>
+          <td className="name">{this.state.student}</td>
           {row}
         </tr>
     </Fragment>
