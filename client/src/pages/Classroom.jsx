@@ -29,6 +29,7 @@ class Classroom extends Component {
   async handleGroupClick(e, group) {
     e.preventDefault()
     await this.updateGroup(group)
+    await this.updateGroup(group)
   }
 
   async updateGroup(group) {
@@ -71,24 +72,8 @@ class Classroom extends Component {
               onClick={(e) => this.handleGroupClick(e, group)}><span>{group}</span></li>
       )
     })
-    let data
-    try {
-      data = {
-        group: this.state.group,
-        teacher: this.key,
-        reg: this.tabs.current.state.actualTab,
-        update: this.updateGroup
-      }
-    }
-    catch(TypeError) {
-      data = {
-        group: this.state.group,
-        teacher: this.key,
-        update: this.updateGroup
-      }
-    }
 
-    return (
+    let toRender = [
         <>
           <header id="top-bar">
             <span id="tech">Kaerdos</span> School Tool
@@ -98,18 +83,31 @@ class Classroom extends Component {
             <div className="sign">Grupos</div>
             {groups}
           </aside>
-
-          {this.state.table ? (
-              <>
-              <Tabs ref={this.tabs} tabs={this.state.tabs}
-                    update={this.update} group={this.state.group} />
-              <div id="table">
-                <Table sup_regs={this.state.sup_regs}
-                       students={this.state.students} data={data} />
-              </div></>
-          ) : null}
           </>
+    ]
+    let data
+
+    data = {
+      group: this.state.group,
+      teacher: this.key,
+      update: this.updateGroup,
+    }
+
+    data.reg = this.tabs.current ? this.tabs.current.state.actualTab : ''
+
+    toRender.push(
+        this.state.table ? (
+              <>
+                <Tabs ref={this.tabs} tabs={this.state.tabs}
+                      update={this.update} group={this.state.group} />
+                <div id="table">
+                  <Table sup_regs={this.state.sup_regs}
+                         students={this.state.students} data={data} />
+                </div></>
+          ) : null
     )
+
+    return toRender
   }
 }
 

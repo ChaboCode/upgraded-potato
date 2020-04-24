@@ -67,7 +67,7 @@ class HeaderRow extends Component {
         this.regs.map(ass => (
             <th className="assignment" title={ass.desc}>
               <div>
-                <span>{ass}</span>
+                <span>{ass.split('.')[0]}</span>
               </div>
             </th>
         ))

@@ -3,6 +3,10 @@ const express = require('express'),
     sha256 = require('js-sha256').sha256,
     Teachers = require('../models/TeacherSchema')
 
+const checkIfExists = (name, regs) => {
+    return name in regs ? checkIfExists(name.concat('.'), regs) : name
+}
+
 router.route('/getGroups').post((req, res) => {
     Teachers.find({
         key: sha256(req.body.key)
@@ -46,7 +50,9 @@ router.route('/addNewGroupRegister').post((req, res) => {
         for(let i = 0; i < group_length; i++) {
             new_regs.push('')
         }
-        data.groups[group].regs[reg][new_reg] = {
+
+        const verified_reg = checkIfExists(new_reg, data.groups[group].regs[reg])
+        data.groups[group].regs[reg][verified_reg] = {
             desc: '',
             regs: new_regs
         }
