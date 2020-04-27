@@ -1,0 +1,35 @@
+#details-container {
+    background-color: var(--gray-2);
+    border-radius: 20px;
+    border-color: var(--gray-3);
+    border-width: 3px;
+    border-style: solid;
+    width: 260px;
+    height: 100px;
+    padding: 8px 8px 8px 16px;
+}
+
+#name {
+    display: block;
+}
+
+#name-edit{
+    top: -3px;
+    margin-bottom: 2px;
+    padding-left: 5px;
+    width: 230px;
+    border-radius: 10px;
+}
+
+#details {
+    border-radius: 5px;
+    width: 250px;
+    height: 60px;
+    resize: none;
+    border: none;
+    background-color: var(--gray-1);
+    color: var(--gray-5);
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding: 5px 0 0 5px;
+}
