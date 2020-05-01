@@ -19,12 +19,12 @@ class Tabs extends Component {
   render() {
     let propsTabs = this.props.tabs
     let tabs = []
-    propsTabs.map( tab => {
-      tabs.push(<span className="tab"
+    tabs = propsTabs.map( tab => (
+      <span className="tab"
                       onClick={e => this.handleTabClick(e, tab)}>
                   {tab}
-                </span>)
-    })
+                </span>
+    ))
 
     return (
         <nav id="tabs">

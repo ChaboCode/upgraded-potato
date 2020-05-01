@@ -4,6 +4,7 @@ import Row from './Table/Row'
 import HeaderRow from './Table/HeaderRow'
 import './Table/Table.css'
 import Selector from './Selector/Selector'
+import Details from "./Details/Details";
 
 class Table extends Component {
 
@@ -25,7 +26,8 @@ class Table extends Component {
   }
 
   render() {
-    const selector = createRef()
+    const selector = createRef(),
+          details  = createRef()
 
     let students = []
 
@@ -35,17 +37,18 @@ class Table extends Component {
                          regs={this.state.sup_regs} />)
     }
     
-    const hrow = <HeaderRow regs={this.state.sup_regs} data={this.props.data}  />
+    const hrow = <HeaderRow regs={this.state.sup_regs} data={this.props.data} details={details}  />
     
     ///////////////////////////////////////
     return (
-      <>
+      <div style={{'overflowX': 'auto', 'overflowY': 'auto'}}>
         <Selector ref={selector} data={this.props.data} />
-          <table border="1px solid">
-            <thead>{hrow}</thead>
-            <tbody>{students}</tbody>
-          </table>
-      </>
+        <Details ref={details} data={this.props.data} />
+        <table border="1px solid">
+          <thead>{hrow}</thead>
+          <tbody>{students}</tbody>
+        </table>
+      </div>
     )
   }
 }

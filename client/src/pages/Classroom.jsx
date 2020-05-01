@@ -49,7 +49,7 @@ class Classroom extends Component {
           .post('http://localhost:5000/teacher/getGroupRegisters', {
             key: this.key,
             group: group,
-            reg: false
+            reg: tabs.data[0]
           })
     }
     this.setState({
@@ -85,25 +85,24 @@ class Classroom extends Component {
           </aside>
           </>
     ]
-    let data
-
-    data = {
+    let data = {
       group: this.state.group,
       teacher: this.key,
       update: this.updateGroup,
     }
-
+    
     data.reg = this.tabs.current ? this.tabs.current.state.actualTab : ''
 
     toRender.push(
         this.state.table ? (
-              <>
+              <div>
                 <Tabs ref={this.tabs} tabs={this.state.tabs}
                       update={this.update} group={this.state.group} />
                 <div id="table">
                   <Table sup_regs={this.state.sup_regs}
                          students={this.state.students} data={data} />
-                </div></>
+                </div>
+              </div>
           ) : null
     )
 

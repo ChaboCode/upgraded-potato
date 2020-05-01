@@ -43,10 +43,7 @@ class HeaderRow extends Component {
     if (e.key === 'Escape') {
       this.setState({addNew: false})
     } else if (e.key === 'Enter') {
-      //TODO
-      console.log('xd')
       await this.newRegister(this.state.value)
-      console.log('xd2')
       this.setState({addNew: false, value: ''})
     }
   }
@@ -54,6 +51,12 @@ class HeaderRow extends Component {
   handleInputBlur(e) {
     e.preventDefault()
     this.setState({addNew: false})
+  }
+
+  // TODO: Implement this
+  showActivityDetails(e) {
+    e.preventDefault()
+    console.log(e.target)
   }
 
   render() {
@@ -65,8 +68,8 @@ class HeaderRow extends Component {
     header.push(<td className="name header">Alumnos</td>)
     header.push(
         this.regs.map(ass => (
-            <th className="assignment" title={ass.desc}>
-              <div>
+            <th className="assignment" title={ass.desc} onClick={this.showActivityDetails}>
+              <div>{/*TODO: Implement DragNDrop*/}
                 <span>{ass.split('.')[0]}</span>
               </div>
             </th>

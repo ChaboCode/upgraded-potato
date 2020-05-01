@@ -5,6 +5,7 @@
   border: 1px solid white;
   border-radius: 10%;
   position: fixed;
+  z-index: 2;
 }
 
 input::-webkit-inner-spin-button {
@@ -25,6 +26,10 @@ input::-webkit-inner-spin-button {
 }
 
 #storeScore {
+  top: 90px;
+}
+
+.sel-button {
   color: #ddd;
   border: 1px solid #666;
   background-color: #555;

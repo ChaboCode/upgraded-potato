@@ -54,7 +54,7 @@ class Home extends Component {
                 <span id="hello">Bienvenido</span> <br/>
                 <span id="message">Ingrese su clave</span> <br/>
                 <input onChange={this.handleChange} type="password" placeholder="Clave de profesor"/>
-                <button onClick={e => this.handleClick(e)}>Entrar</button>
+                <button id={'login'} onClick={e => this.handleClick(e)}>Entrar</button>
               </div>
             </div>
         )

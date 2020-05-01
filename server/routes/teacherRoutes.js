@@ -45,7 +45,6 @@ router.route('/addNewGroupRegister').post((req, res) => {
         key: sha256(teacher)
     }, async (error, data) => {
         if (error) throw error
-        //TODO: Implement for different regs
         let new_regs = []
         for(let i = 0; i < group_length; i++) {
             new_regs.push('')

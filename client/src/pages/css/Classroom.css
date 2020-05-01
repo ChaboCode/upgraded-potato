@@ -2,10 +2,6 @@
     --bordes: 1px solid rgb(168, 206, 236);
 }
 
-body {
-    overflow: hidden;
-}
-
 #tech{
     font-size: 35px;
     color: rgb(155, 190, 219);

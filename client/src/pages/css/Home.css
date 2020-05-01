@@ -34,7 +34,7 @@ input {
     left: -70px;
 }
 
-button {
+#login {
     background: none;
     cursor: pointer;
 
@@ -43,6 +43,4 @@ button {
     left: -145px;
     height: 70px;
     width: 140px;
-
-    
 }
