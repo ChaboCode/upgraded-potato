@@ -49,9 +49,9 @@ class Row extends Component {
     }
   }
 
-  handleClick(e, row, col) {
+  handleClick = (e, row, col, val) => {
     e.preventDefault()
-    this.props.selector.current.show(row, col)
+    this.props.selector.current.show(row, col, val)
   }
 
   render() {
@@ -62,7 +62,7 @@ class Row extends Component {
           className="activity"
           row={this.state.rowNumber}
           col={i}
-          onClick={e => this.handleClick(e, this.state.rowNumber, i, this.state.cells)}
+          onClick={e => this.handleClick(e, this.state.rowNumber, i, this.state.regs[i])}
           > 
           {this.state.regs[i]}
         </td>
@@ -72,6 +72,8 @@ class Row extends Component {
     return <Fragment key={this.state.rowNumber}>
         <tr>
           <td className="name">{this.state.student}</td>
+          {/* TODO: implement this */}
+          {/* <td className="activity">{this.state.rowNumber}</td> */}
           {row}
         </tr>
     </Fragment>

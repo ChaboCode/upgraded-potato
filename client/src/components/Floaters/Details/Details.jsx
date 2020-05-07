@@ -1,55 +1,31 @@
-import React, {Component, createRef} from 'react'
-import './Details.css'
+import React, {createRef} from 'react'
 
-class Details extends Component {
+import './Details.css'
+import Floater from '../Floater';
+
+class Details extends Floater {
 
   constructor(props) {
     super(props);
 
-    this.details = createRef()
     this.name = createRef()
-
-    this.state = {
-      name: this.props.name,
-      details: this.props.details,
-      show: false,
-      modifyName: false
-    }
-
-    this.handleDetailsChange = this.handleDetailsChange.bind(this)
-    this.handleNameClick = this.handleNameClick.bind(this)
-    this.handleNameChange = this.handleNameChange.bind(this)
-    this.handleNameKey = this.handleNameKey.bind(this)
   }
 
-  handleDetailsChange(e) {
-    this.setState({
-      details: e.target.value
-    })
-  }
-
-  handleNameClick(e) {
+  handleNameClick = e => {
     e.preventDefault()
     this.setState({
       modifyName: true
     })
   }
 
-  handleNameChange(e) {
+  handleNameChange = e => {
     e.preventDefault()
     this.setState({
       name: e.target.value
     })
   }
 
-  handleNameKey(e) {
-    e.key === 'Enter'  && this.save()
-    e.key === 'Escape' && this.setState({
-      modifyName: false
-    })
-  }
-
-  save() {
+  save = async () => {
     this.setState({
       modifyName: false,
     })
@@ -57,10 +33,10 @@ class Details extends Component {
     console.log('xd')
   }
 
-  render() {
+  render = () => {
     return this.state.show ?
         <div id={'details-container'}>
-          {/*TODO: Enable reg rename*/}
+          {/* TODO: Enable reg rename */}
           {this.state.modifyName ?
               <input id={'name-edit'} onChange={this.handleNameChange}
                      onKeyDown={this.handleNameKey} value={this.state.name} autoFocus/>

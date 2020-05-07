@@ -4,7 +4,7 @@ import axios from 'axios'
 import './css/Classroom.css'
 
 import Table from '../components/Table'
-import Tabs from '../components/Tabs'
+import Tabs from '../components/Tabs/Tabs'
 
 class Classroom extends Component {
 
@@ -68,8 +68,8 @@ class Classroom extends Component {
   render() {
     let groups = this.groups.map(group => {
       return (
-          <li className="group"
-              onClick={(e) => this.handleGroupClick(e, group)}><span>{group}</span></li>
+          <div className="group"
+              onClick={(e) => this.handleGroupClick(e, group)}><span>{group}</span></div>
       )
     })
 
@@ -79,11 +79,11 @@ class Classroom extends Component {
             <span id="tech">Kaerdos</span> School Tool
           </header>
 
-          <aside id="groups">
+          <nav id="groups">
             <div className="sign">Grupos</div>
             {groups}
-          </aside>
-          </>
+          </nav>
+        </>
     ]
     let data = {
       group: this.state.group,
@@ -94,7 +94,7 @@ class Classroom extends Component {
     data.reg = this.tabs.current ? this.tabs.current.state.actualTab : ''
 
     toRender.push(
-        this.state.table ? (
+        this.state.table && (
               <div>
                 <Tabs ref={this.tabs} tabs={this.state.tabs}
                       update={this.update} group={this.state.group} />
@@ -103,7 +103,7 @@ class Classroom extends Component {
                          students={this.state.students} data={data} />
                 </div>
               </div>
-          ) : null
+          )
     )
 
     return toRender

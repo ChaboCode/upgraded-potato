@@ -53,10 +53,6 @@ table {
   cursor: pointer;
 }
 
-.add-assign{
-  
-}
-
 .add-assign:hover {
     background-color: var(--gray-1);
 }

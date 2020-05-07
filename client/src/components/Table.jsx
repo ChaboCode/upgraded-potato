@@ -3,8 +3,8 @@ import React, { Component, createRef } from 'react'
 import Row from './Table/Row'
 import HeaderRow from './Table/HeaderRow'
 import './Table/Table.css'
-import Selector from './Selector/Selector'
-import Details from "./Details/Details";
+import Selector from './Floaters/Selector/Selector'
+import Details from "./Floaters/Details/Details";
 
 class Table extends Component {
 

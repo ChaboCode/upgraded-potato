@@ -10,16 +10,13 @@ class HeaderRow extends Component {
       addNew: false,
       value: ''
     }
-    this.escFunction = this.escFunction.bind(this)
-    this.handleInputChange = this.handleInputChange.bind(this)
-    this.handleInputBlur = this.handleInputBlur.bind(this)
   }
 
-  handleNewClick(_e) {
+  handleNewClick = () => {
     this.setState({addNew: true})
   }
 
-  async newRegister(reg) {
+  newRegister =  async reg => {
     console.log(this.props.data.reg)
     await axios.post('http://localhost:5000/teacher/addNewGroupRegister', {
       key: this.props.data.teacher,
@@ -37,9 +34,7 @@ class HeaderRow extends Component {
     this.setState({value: e.target.value})
   }
 
-  async escFunction(e) {
-
-    e.preventDefault()
+  escFunction = async e => {
     if (e.key === 'Escape') {
       this.setState({addNew: false})
     } else if (e.key === 'Enter') {
@@ -48,28 +43,29 @@ class HeaderRow extends Component {
     }
   }
 
-  handleInputBlur(e) {
+  handleInputBlur = e => {
     e.preventDefault()
     this.setState({addNew: false})
   }
 
   // TODO: Implement this
-  showActivityDetails(e) {
+  showActivityDetails = e => {
     e.preventDefault()
     console.log(e.target)
   }
 
-  render() {
+  render = () => {
     this.regs = []
     for (let key in this.props.regs) {
       this.regs.push(key)
     }
     let header = []
     header.push(<td className="name header">Alumnos</td>)
+    //TODO: Implement list's numbers
     header.push(
         this.regs.map(ass => (
             <th className="assignment" title={ass.desc} onClick={this.showActivityDetails}>
-              <div>{/*TODO: Implement DragNDrop*/}
+              <div>
                 <span>{ass.split('.')[0]}</span>
               </div>
             </th>
