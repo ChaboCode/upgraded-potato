@@ -1,8 +1,6 @@
 table {
   border-spacing: 0;
   border: none;
-  margin: 1em 0;
-  /* border: 0.1em solid #cccccc; */
   text-align: center;
 }
 
@@ -22,6 +20,8 @@ table {
   padding: 4px;
   background-color: #252525;
   text-align: end;
+  position: sticky;
+  left: 0;
   z-index: 1;
 }
 
