@@ -7,9 +7,10 @@ let express = require('express'),
 const teacherRoute = require('./routes/teacherRoutes')
 const groupRoute = require('./routes/groupRoutes')
 
-mongoose.Promise = global.Promise
+// mongoose.Promise = global.Promise
 mongoose.connect(database.db, {
-    useNewUrlParser: true
+    useNewUrlParser: true,
+    useUnifiedTopology: true
 }).then(() => {
     console.log('Database connected sucessfully')
 }, error => {
@@ -24,6 +25,11 @@ app.use(bodyParser.urlencoded({
 app.use(cors())
 app.use('/teacher', teacherRoute)
 app.use('/group', groupRoute)
+
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    next();
+  });
 
 app.get('/', (req, res) => {
     res.send('API')

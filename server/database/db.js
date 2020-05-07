@@ -1,3 +1,3 @@
 module.exports = {
-    db: 'mongodb://localhost:27017/school'
+    db: 'mongodb+srv://sans:protoxKM12@saul-qzbyq.mongodb.net/school?retryWrites=true&w=majority'
 }
