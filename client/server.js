@@ -12,7 +12,7 @@ app.get('*', (req, res) =>{
 
 app.listen(port, () => {
   console.log(`Server's up on ${port}`)
-}
+})
 
 
 

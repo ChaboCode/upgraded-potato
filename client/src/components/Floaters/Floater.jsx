@@ -1,5 +1,7 @@
 import { Component, createRef } from 'react'
 
+import './Floater.css'
+
 class Floater extends Component {
   constructor(props) {
     super(props)
