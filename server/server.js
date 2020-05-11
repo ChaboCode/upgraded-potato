@@ -7,7 +7,7 @@ let express = require('express'),
 const teacherRoute = require('./routes/teacherRoutes')
 const groupRoute = require('./routes/groupRoutes')
 
-// mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise
 mongoose.connect(database.db, {
     useNewUrlParser: true,
     useUnifiedTopology: true
@@ -26,16 +26,18 @@ app.use(cors())
 app.use('/teacher', teacherRoute)
 app.use('/group', groupRoute)
 
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    next();
-  });
-
 app.get('/', (req, res) => {
     res.send('API')
 })
 
-app.listen(5000, () => {
+app.set('port', process.env.PORT || 3000)
+
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  next();
+});
+
+app.listen(app.get('port'), () => {
     console.log(`CONNECTED! Server runing at port 5000`)
 })
 

@@ -7,8 +7,8 @@ const checkIfExists = (name, regs) => {
     return name in regs ? checkIfExists(name.concat('.'), regs) : name
 }
 
-router.route('/getGroups').post((req, res) => {
-    Teachers.find({
+router.route('/getGroups').post(async (req, res) => {
+    await Teachers.find({
         key: sha256(req.body.key)
     }, (error, data) => {
         if (error) return error
