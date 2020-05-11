@@ -14,4 +14,4 @@ En /client:
 En /server:
 - npm run dev
 
-Crear una base de datos llamada school, y mediante Compass importar las colecciones
+La base de datos esta alojada en Atlas
