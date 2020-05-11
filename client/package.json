@@ -3,7 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@babel/parser": "^7.9.4",
     "axios": "0.19.2",
     "express": "^4.17.1",
     "js-sha256": "^0.9.0",
@@ -14,13 +13,11 @@
     "react-scripts": "^3.4.1"
   },
   "devDependencies": {
-    "@babel/preset-env": "^7.9.5",
-    "@babel/preset-react": "^7.9.4",
-    "nock": "^12.0.3",
-    "react-test-renderer": "^16.13.1"
+    "nock": "^12.0.3"
   },
   "scripts": {
     "start": "node server.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
