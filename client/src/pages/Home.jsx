@@ -18,7 +18,7 @@ class Home extends Component {
   async handleClick(e) {
     e.preventDefault()
     const response = await axios.post(
-      "https://heroku-super.herokuapp.com/teacher/getGroups",
+      "https://kaerdos-st-server.herokuapp.com/teacher/getGroups",
       { key: this.state.key }
     );
     console.log(this.state.key)

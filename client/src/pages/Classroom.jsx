@@ -33,12 +33,12 @@ class Classroom extends Component {
   }
 
   async updateGroup(group) {
-    const students = await axios.post('https://heroku-super.herokuapp.com/group/getStudentsByName', {name: group})
-    const tabs = await axios.post('https://heroku-super.herokuapp.com/teacher/getTabs', {key: this.key, group: group})
+    const students = await axios.post('https://kaerdos-st-server.herokuapp.com/group/getStudentsByName', {name: group})
+    const tabs = await axios.post('https://kaerdos-st-server.herokuapp.com/teacher/getTabs', {key: this.key, group: group})
     let sup_regs
     try {
       sup_regs = await axios
-          .post('https://heroku-super.herokuapp.com/teacher/getGroupRegisters', {
+          .post('https://kaerdos-st-server.herokuapp.com/teacher/getGroupRegisters', {
             key: this.key,
             group: group,
             reg: this.tabs.current.state.actualTab
@@ -46,7 +46,7 @@ class Classroom extends Component {
     }
     catch(TypeError) {
       sup_regs = await axios
-          .post('https://heroku-super.herokuapp.com/teacher/getGroupRegisters', {
+          .post('https://kaerdos-st-server.herokuapp.com/teacher/getGroupRegisters', {
             key: this.key,
             group: group,
             reg: tabs.data[0]
