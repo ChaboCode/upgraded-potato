@@ -7,7 +7,7 @@ import './selector.css'
 class Selector extends Floater {
   
   save = async () => {
-    await this.state.value && axios.post('http://localhost:5000/teacher/updateRegisterOnIndex', {
+    await this.state.value && axios.post('https://heroku-super.herokuapp.com/teacher/updateRegisterOnIndex', {
       teacher: this.props.data.teacher,
       student: this.state.pos.row,  //
       reg: this.state.pos.col, //

@@ -17,8 +17,13 @@ class Home extends Component {
 
   async handleClick(e) {
     e.preventDefault()
-    const response = await axios.post('http://localhost:5000/teacher/getGroups', {key: this.state.key})
+    const response = await axios.post(
+      "https://heroku-super.herokuapp.com/teacher/getGroups",
+      { key: this.state.key }
+    );
+    console.log(this.state.key)
     const groups = response.data
+    console.log(response)
     let names = []
     for (let key in groups) {
       names.push(key)
