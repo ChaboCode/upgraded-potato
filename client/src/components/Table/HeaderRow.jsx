@@ -17,7 +17,6 @@ class HeaderRow extends Component {
   }
 
   newRegister =  async reg => {
-    console.log(this.props.data.reg)
     await axios.post('https://kaerdos-st-server.herokuapp.com/teacher/addNewGroupRegister', {
       key: this.props.data.teacher,
       group: this.props.data.group,

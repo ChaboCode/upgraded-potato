@@ -21,9 +21,7 @@ class Home extends Component {
       "https://kaerdos-st-server.herokuapp.com/teacher/getGroups",
       { key: this.state.key }
     );
-    console.log(this.state.key)
     const groups = response.data
-    console.log(response)
     let names = []
     for (let key in groups) {
       names.push(key)
