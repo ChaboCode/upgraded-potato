@@ -29,7 +29,7 @@ class HeaderRow extends Component {
   }
 
 
-  handleInputChange(e) {
+  handleInputChange = e => {
     e.preventDefault()
     this.setState({value: e.target.value})
   }
