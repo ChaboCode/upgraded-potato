@@ -10,6 +10,8 @@ const checkIfExists = (name, regs) => {
 router.route('/getGroups').post(async (req, res) => {
     await Teachers.find({
         key: sha256(req.body.key)
+    }, null, {
+        sort: {date: -1}
     }, (error, data) => {
         if (error) return error
         try {
