@@ -44,7 +44,7 @@ body {
 /**************************
  * CSS para las pestanas de la aplicacion
  */
-
+/* TODO: Organizar CSS */
 #tabs {
      border-bottom: var(--bordes);
      text-align: left;
@@ -56,13 +56,14 @@ body {
     font-size: 15px;
     background-color: var(--gray-1);
     border: 1px solid var(--gray-5);
+    border-bottom: none;
     border-top-left-radius: 20%;
     border-top-right-radius: 20%;
     margin-left: 6px;
     cursor: pointer;
 
     position: relative;
-    top:8px;
+    top:6px;
 }
 
 .tab:hover {
