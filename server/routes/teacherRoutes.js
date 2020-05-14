@@ -4,7 +4,7 @@ const express = require('express'),
     Teachers = require('../models/TeacherSchema')
 
 const checkIfExists = (name, regs) => {
-    for(let reg in regs) {
+    for(let reg of regs) {
         if(name === reg.name) {
             checkIfExists(name.concat('.'), regs)
         }
@@ -46,8 +46,11 @@ router.route('/addNewGroupRegister').post((req, res) => {
             new_regs.push('')
         }
 
-        const verified_reg = checkIfExists(new_reg, data.groups[group].regs[reg])
-        data.groups[group].regs[reg][verified_reg] = {
+        let regs = data.groups[group].regs
+
+        const verified_name = checkIfExists(new_reg, regs[reg])
+        regs[reg][regs[reg].length] = {
+            name: verified_name,
             desc: '',
             regs: new_regs
         }
