@@ -5,8 +5,8 @@ class Row extends Component {
     super(props)
 
     let regs = []
-    for(let key in this.props.regs) {
-        regs.push(this.props.regs[key].regs[this.rowNumber])
+    for(let reg of this.props.regs) {
+        regs.push(reg.regs[this.props.rowNumber])
     }
 
     for(let i = 0; i < regs.length; ++i) {
@@ -56,7 +56,7 @@ class Row extends Component {
 
   render() {
     let row = []
-    for (let i = 0; i < this.state.cells; ++i) {
+    for (let i = 0; i < this.state.cells - 1; ++i) {
       row.push(
         <td
           className="activity"

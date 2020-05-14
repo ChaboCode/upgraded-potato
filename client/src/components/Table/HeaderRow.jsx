@@ -54,22 +54,23 @@ class HeaderRow extends Component {
   }
 
   render = () => {
-    this.regs = []
-    for (let key in this.props.regs) {
-      this.regs.push(key)
-    }
     let header = []
     header.push(<td className="name header">Alumnos</td>)
     //TODO: Implement list's numbers
-    header.push(
-        this.regs.map(ass => (
-            <th className="assignment" title={ass.desc} onClick={this.showActivityDetails}>
-              <div>
-                <span>{ass.split('.')[0]}</span>
-              </div>
-            </th>
-        ))
-    )
+    for(let reg of this.props.regs) {
+      header.push(
+          <th
+            className="assignment"
+            title={reg.desc}
+            onClick={this.showActivityDetails}
+          >
+            <div>
+              <span>{reg.name.split(".")[0]}</span>
+            </div>
+          </th>
+      )
+    }
+    
     if (this.state.addNew) {
       header.push(
           <td className="assignment add-assign" onClick={e => this.handleNewClick(e)}>

@@ -4,21 +4,20 @@ const express = require('express'),
     Teachers = require('../models/TeacherSchema')
 
 const checkIfExists = (name, regs) => {
-    return name in regs ? checkIfExists(name.concat('.'), regs) : name
+    for(let reg in regs) {
+        if(name === reg.name) {
+            checkIfExists(name.concat('.'), regs)
+        }
+        return name
+    }
 }
 
-router.route('/getGroups').post(async (req, res) => {
-    await Teachers.find({
+router.route('/getGroups').post((req, res) => {
+    Teachers.find({
         key: sha256(req.body.key)
-    }, null, {
-        sort: {date: -1}
     }, (error, data) => {
         if (error) return error
-        try {
-            res.json(data[0].groups)
-        } catch (TypeError) {
-            res.json(null)
-        }
+        res.json(data ? data[0].groups : null)
     })
 })
 
@@ -27,12 +26,7 @@ router.route('/getGroupRegisters').post((req, res) => {
         key: sha256(req.body.key)
     }, (error, data) => {
         if (error) return error
-        try {
-            res.json(data.groups[req.body.group].regs[req.body.reg ||
-            Object.getOwnPropertyNames(data.groups[req.body.group].regs)[0]])
-        } catch (TypeError) {
-            res.json(null)
-        }
+        res.json(data.groups[req.body.group].regs[req.body.reg])
     })
 })
 
