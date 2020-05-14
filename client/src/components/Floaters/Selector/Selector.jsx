@@ -3,11 +3,12 @@ import axios from 'axios'
 
 import Floater from '../Floater'
 import './selector.css'
+import uris from '../../../server'
 
 class Selector extends Floater {
   
   save = async () => {
-    await this.state.value && axios.post('https://kaerdos-st-server.herokuapp.com/teacher/updateRegisterOnIndex', {
+    await this.state.value && axios.post(`${uris.deploy}/teacher/updateRegisterOnIndex`, {
       teacher: this.props.data.teacher,
       student: this.state.pos.row,  //
       reg: this.state.pos.col, //

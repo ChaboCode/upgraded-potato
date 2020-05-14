@@ -4,6 +4,7 @@ import {sha256} from 'js-sha256'
 
 import './css/Home.css'
 import Classroom from './Classroom'
+import uris from '../server'
 
 class Home extends Component {
   constructor(props) {
@@ -18,7 +19,7 @@ class Home extends Component {
   async handleClick(e) {
     e.preventDefault()
     const response = await axios.post(
-      "https://kaerdos-st-server.herokuapp.com/teacher/getGroups",
+      `${uris.deploy}/teacher/getGroups`,
       { key: this.state.key }
     );
     const groups = response.data

@@ -5,6 +5,7 @@ import './css/Classroom.css'
 
 import Table from '../components/Table'
 import Tabs from '../components/Tabs/Tabs'
+import uris from '../server'
 
 class Classroom extends Component {
 
@@ -33,25 +34,25 @@ class Classroom extends Component {
   }
 
   async updateGroup(group) {
-    const students = await axios.post('https://kaerdos-st-server.herokuapp.com/group/getStudentsByName', {name: group})
-    const tabs = await axios.post('https://kaerdos-st-server.herokuapp.com/teacher/getTabs', {key: this.key, group: group})
+    const students = await axios.post(`${uris.deploy}/group/getStudentsByName`, {name: group})
+    const tabs = await axios.post(`${uris.deploy}/teacher/getTabs`, {key: this.key, group: group})
     let sup_regs
-    try {
+    if(this.tabs.current) {
       sup_regs = await axios
-          .post('https://kaerdos-st-server.herokuapp.com/teacher/getGroupRegisters', {
+          .post(`${uris.deploy}/teacher/getGroupRegisters`, {
             key: this.key,
             group: group,
             reg: this.tabs.current.state.actualTab
           })
     }
-    catch(TypeError) {
+    else {
       sup_regs = await axios
-          .post('https://kaerdos-st-server.herokuapp.com/teacher/getGroupRegisters', {
+          .post(`${uris.deploy}/teacher/getGroupRegisters`, {
             key: this.key,
             group: group,
             reg: tabs.data[0]
           })
-    }
+        }
     this.setState({
       sup_regs: sup_regs.data,
       students: students.data,

@@ -1,6 +1,8 @@
 import React, {Component} from 'react'
 import axios from 'axios'
 
+import uris from '../../server'
+
 class HeaderRow extends Component {
 
   constructor(props) {
@@ -17,7 +19,7 @@ class HeaderRow extends Component {
   }
 
   newRegister =  async reg => {
-    await axios.post('https://kaerdos-st-server.herokuapp.com/teacher/addNewGroupRegister', {
+    await axios.post(`${uris.deploy}/teacher/addNewGroupRegister`, {
       key: this.props.data.teacher,
       group: this.props.data.group,
       group_length: this.props.data.group_length,
