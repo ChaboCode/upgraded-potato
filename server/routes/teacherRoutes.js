@@ -93,4 +93,13 @@ router.route('/getTabs').post((req, res) => {
     })
 })
 
+router.route('/deleteTab').post((req, res) => {
+    Teachers.findOne({
+        key: sha256(req.body.key)
+    }, (err, data) => {
+        if (err) throw err
+        delete data.groups[req.body.group].regs[req.body.tab]
+    })
+})
+
 module.exports = router
