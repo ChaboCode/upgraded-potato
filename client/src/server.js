@@ -1,7 +1,2 @@
-const dev = 'http://localhost:5000'
-const deploy = 'https://kaerdos-st-server.herokuapp.com'
-
-export default {
-  dev: dev,
-  deploy: deploy
-}
+// export default 'http://localhost:5000'
+export default 'https://kaerdos-st-server.herokuapp.com'

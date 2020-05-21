@@ -34,12 +34,12 @@ class Classroom extends Component {
   }
 
   async updateGroup(group) {
-    const students = await axios.post(`${uris.deploy}/group/getStudentsByName`, {name: group})
-    const tabs = await axios.post(`${uris.deploy}/teacher/getTabs`, {key: this.key, group: group})
+    const students = await axios.post(`${uris}/group/getStudentsByName`, {name: group})
+    const tabs = await axios.post(`${uris}/teacher/getTabs`, {key: this.key, group: group})
     let sup_regs
     if(this.tabs.current) {
       sup_regs = await axios
-          .post(`${uris.deploy}/teacher/getGroupRegisters`, {
+          .post(`${uris}/teacher/getGroupRegisters`, {
             key: this.key,
             group: group,
             reg: this.tabs.current.state.actualTab
@@ -47,7 +47,7 @@ class Classroom extends Component {
     }
     else {
       sup_regs = await axios
-          .post(`${uris.deploy}/teacher/getGroupRegisters`, {
+          .post(`${uris}/teacher/getGroupRegisters`, {
             key: this.key,
             group: group,
             reg: tabs.data[0]

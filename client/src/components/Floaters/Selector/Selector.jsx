@@ -8,7 +8,7 @@ import uris from '../../../server'
 class Selector extends Floater {
   
   save = async () => {
-    await this.state.value && axios.post(`${uris.deploy}/teacher/updateRegisterOnIndex`, {
+    await this.state.value && axios.post(`${uris}/teacher/updateRegisterOnIndex`, {
       teacher: this.props.data.teacher,
       student: this.state.pos.row,  //
       reg: this.state.pos.col, //

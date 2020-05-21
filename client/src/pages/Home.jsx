@@ -19,7 +19,7 @@ class Home extends Component {
   async handleClick(e) {
     e.preventDefault()
     const response = await axios.post(
-      `${uris.deploy}/teacher/getGroups`,
+      `${uris}/teacher/getGroups`,
       { key: this.state.key }
     );
     const groups = response.data
