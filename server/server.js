@@ -1,8 +1,10 @@
-let express = require('express'),
-    mongoose = require('mongoose'),
-    cors = require('cors'),
-    bodyParser = require('body-parser'),
-    database = require('./database/db')
+let express = require('express')
+let http = require('http')
+let mongoose = require('mongoose')
+let cors = require('cors')
+let bodyParser = require('body-parser')
+let database = require('./database/db')
+let socketIO = require('socket.io')
 
 const teacherRoute = require('./routes/teacherRoutes')
 const groupRoute = require('./routes/groupRoutes')
@@ -37,10 +39,6 @@ app.use((req, res, next) => {
   next();
 });
 
-app.listen(app.get('port'), () => {
-    console.log(`CONNECTED! Server runing at port 5000`)
-})
-
 app.use((req, res, next) => {
     next(createError(404))
 })
@@ -49,4 +47,27 @@ app.use((err, req, res, next) => {
     console.error(err.message)
     if(!err.statusCode) err.statusCode = 500
     res.status(err.statusCode).send(err.message)
+})
+
+const server = http.createServer(app)
+
+const io = socketIO(server)
+
+io.on("connection", socket => {
+    console.info(`Client connected [id=${socket.id}]`)
+
+    socket.on("disconnect", () => {
+        console.log('Client disconnected')
+    })
+
+    socket.on('xd', data => {
+        console.log(`${socket.id} says XD`)
+        io.to(socket.id).emit('recivedXD', `Received xd from ${socket.id}`)
+    })
+})
+
+
+
+server.listen(app.get('port'), () => {
+    console.log(`Listening on port ${app.get('port')}`)
 })
