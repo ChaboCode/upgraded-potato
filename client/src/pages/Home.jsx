@@ -57,7 +57,8 @@ class Home extends Component {
               <div id="container">
                 <span id="hello">Bienvenido</span> <br/>
                 <span id="message">Ingrese su clave</span> <br/>
-                <input onChange={this.handleChange} type="password" placeholder="Clave de profesor"/>
+                <input onChange={this.handleChange} type="password" 
+                placeholder="Clave de profesor" id={'key-input'}/>
                 <button id={'login'} onClick={e => this.handleClick(e)}>Entrar</button>
               </div>
             </div>
