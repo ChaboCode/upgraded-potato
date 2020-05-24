@@ -16,7 +16,7 @@ class Selector extends Floater {
   }
   
   save = async () => {
-    await this.state.value && axios.post(`${uris}/teacher/updateRegisterOnIndex`, {
+    this.state.value && await axios.post(`${uris}/teacher/updateRegisterOnIndex`, {
       teacher: this.props.data.teacher,
       student: this.state.pos.row,  //
       reg: this.state.pos.col, //
