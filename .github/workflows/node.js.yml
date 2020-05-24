@@ -36,3 +36,15 @@ jobs:
     - name: Testing React client
       run: npm test
       working-directory: client
+    
+    - name: Installing server dependencies
+      run: npm ci
+      working-directory: server
+
+    - name: Building server
+      run: npm run build
+      working-directory: server
+
+    - name: Testing server
+      run: npm run build
+      working-directory: server
