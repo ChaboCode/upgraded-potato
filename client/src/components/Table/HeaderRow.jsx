@@ -63,11 +63,10 @@ class HeaderRow extends Component {
       header.push(
           <th
             className="assignment"
-            title={reg.desc}
-            onClick={this.showActivityDetails}
-          >
+            onClick={this.showActivityDetails} >
             <div>
-              <span>{reg.name.split(".")[0]}</span>
+              {/* TODO: Implement reg.desc */}
+              <span title={reg.name /*Here*/}>{reg.name.split(".")[0]}</span>
             </div>
           </th>
       )

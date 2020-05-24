@@ -17,8 +17,8 @@ class Floater extends Component {
     }
 
     this.offsets = {
-      left: _ => 0,
-      top: _ => 0
+      left: col => col,
+      top: row => row + 28
     }
 
     this.valueInput = createRef()
