@@ -6,6 +6,14 @@ import './selector.css'
 import uris from '../../../server'
 
 class Selector extends Floater {
+  constructor() {
+    super()
+
+    this.offsets = {
+      left: col => (394 + ((col - 1) * 28)),
+      top: row => (206 + ((row) * 37))
+    }
+  }
   
   save = async () => {
     await this.state.value && axios.post(`${uris}/teacher/updateRegisterOnIndex`, {

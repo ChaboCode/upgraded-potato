@@ -13,7 +13,12 @@ class Floater extends Component {
         row: 0,
         col: 0
       },
-      show: false
+      show: false,
+    }
+
+    this.offsets = {
+      left: _ => 0,
+      top: _ => 0
     }
 
     this.valueInput = createRef()
@@ -25,8 +30,8 @@ class Floater extends Component {
       //FIXME: XD
       style: {
         float: 'left',
-        top: (206 + ((row) * 37)).toString() + 'px',
-        left: (394 + ((col - 1) * 28)).toString() + 'px'
+        top: this.offsets.top(row).toString() + 'px',
+        left: this.offsets.left(col).toString() + 'px'
       },
       value: val ? val.toString() : '',
       pos: {
